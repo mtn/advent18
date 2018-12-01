@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 seen = set()
-
 changes = []
 with open("inp1") as f:
     for line in f:
@@ -20,9 +19,5 @@ while True:
 
     ind += 1
     ind %= num_changes
-    
-
-
-
 
 print(total)

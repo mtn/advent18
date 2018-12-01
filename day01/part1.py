@@ -6,5 +6,3 @@ with open("inp1") as f:
         total += int(line.strip())
 
 print(total)
-
-

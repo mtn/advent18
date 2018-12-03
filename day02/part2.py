@@ -12,4 +12,3 @@ with open("input.txt") as f:
                 exit()
 
         words.add(word.strip())
-

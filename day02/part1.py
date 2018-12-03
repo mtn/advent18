@@ -17,7 +17,3 @@ with open("input.txt") as f:
             num_exactly_thrice += 1
 
 print(num_exactly_twice * num_exactly_thrice)
-
-
-
-

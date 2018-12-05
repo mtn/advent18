@@ -17,6 +17,7 @@ class EventType(Enum):
     FallAsleep = 2
     BeginShift = 3
 
+
 class Event(object):
     def __init__(self, time, event_type, new_guard=None):
         self.time = time
@@ -25,6 +26,7 @@ class Event(object):
 
     def __lt__(self, other):
         return self.time < other.time
+
 
 with open("input.txt") as f:
     for line in f:
@@ -37,7 +39,9 @@ with open("input.txt") as f:
             if current_guard not in guards:
                 guards[current_guard] = [0] * 60
 
-            heapq.heappush(events, Event(datetime_object, EventType.BeginShift, current_guard))
+            heapq.heappush(
+                events, Event(datetime_object, EventType.BeginShift, current_guard)
+            )
         elif "wakes up" in line:
             heapq.heappush(events, Event(datetime_object, EventType.WakeUp))
         elif "falls asleep" in line:

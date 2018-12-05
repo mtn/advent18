@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 total = 0
-with open("inp1") as f:
+with open("input.txt") as f:
     for line in f:
         total += int(line.strip())
 

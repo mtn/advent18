@@ -2,7 +2,7 @@
 
 seen = set()
 changes = []
-with open("inp1") as f:
+with open("input.txt") as f:
     for line in f:
         changes.append(int(line.strip()))
 

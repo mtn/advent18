@@ -49,5 +49,3 @@ def compute_value(ind):
 
 read_child(0, inp)
 print(compute_value(0))
-
-# for node in nodes:

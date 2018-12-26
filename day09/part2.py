@@ -3,9 +3,10 @@
 from collections import deque
 
 with open("input.txt") as f:
-   inp = f.read().strip().split(" ")
-   num_players = int(inp[0])
-   last_worth = int(inp[6])
+    inp = f.read().strip().split(" ")
+    num_players = int(inp[0])
+    last_worth = int(inp[6])
+
 
 def run(num_players, last_worth):
     marbles = deque([0])
@@ -32,5 +33,6 @@ def run(num_players, last_worth):
         i %= num_players
 
     return max(scores)
+
 
 print(run(num_players, last_worth * 100))

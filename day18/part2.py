@@ -62,6 +62,8 @@ def print_grid(grid):
     print(grid_str(grid))
     print("")
 
+# this method of cycle detection could fail is the scores are periodic
+# thankfully this seemed not to be the case (didn't check)
 scores = {} # score => ind we saw it
 last_cycle_len = 0
 for i in range(1000000000):

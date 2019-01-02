@@ -19,25 +19,25 @@ DIR_STRAIGHT = 10
 
 dir_map = {"^": DIR_UP, "v": DIR_DOWN, ">": DIR_RIGHT, "<": DIR_LEFT}
 track_map = {
-    "-":  STRAIGHT_HORIZ,
-    "<":  STRAIGHT_HORIZ,
-    ">":  STRAIGHT_HORIZ,
-    "|":  STRAIGHT_VERT,
-    "^":  STRAIGHT_VERT,
-    "v":  STRAIGHT_VERT,
-    "+":  INTERSECTION,
-    "/":  CURVE_RIGHT,
+    "-": STRAIGHT_HORIZ,
+    "<": STRAIGHT_HORIZ,
+    ">": STRAIGHT_HORIZ,
+    "|": STRAIGHT_VERT,
+    "^": STRAIGHT_VERT,
+    "v": STRAIGHT_VERT,
+    "+": INTERSECTION,
+    "/": CURVE_RIGHT,
     "\\": CURVE_LEFT,
-    " ":  EMPTY,
+    " ": EMPTY,
 }
 
 back = {
     STRAIGHT_HORIZ: "-",
-    STRAIGHT_VERT:  "|",
-    INTERSECTION:   "+",
-    CURVE_RIGHT:    "/",
-    CURVE_LEFT:     "\\",
-    EMPTY:          " ",
+    STRAIGHT_VERT: "|",
+    INTERSECTION: "+",
+    CURVE_RIGHT: "/",
+    CURVE_LEFT: "\\",
+    EMPTY: " ",
 }
 
 tracks = []
@@ -50,16 +50,18 @@ with open("input.txt") as f:
         track_row = []
         for x, c in enumerate(line):
             LINE_LEN = len(line) - 1
-            if c == "\n": continue
+            if c == "\n":
+                continue
             if c in ["^", "v", "<", ">"]:
                 trains.append((dir_map[c], x, y, 0))
-                assert (x,y) not in train_positions
-                train_positions.add((x,y))
+                assert (x, y) not in train_positions
+                train_positions.add((x, y))
             track_row.append(track_map[c])
 
         tracks.append(track_row)
 
 intersection_dirs = [DIR_LEFT, DIR_STRAIGHT, DIR_RIGHT]
+
 
 def orient(new_dir, cur_dir):
     if new_dir == DIR_STRAIGHT:
@@ -71,6 +73,7 @@ def orient(new_dir, cur_dir):
         return (cur_dir - 1) % 4
 
     assert False
+
 
 def train_after(cur_dir, new_tile, newx, newy, dir_ind):
     global intsection_dirs
@@ -102,8 +105,8 @@ def train_after(cur_dir, new_tile, newx, newy, dir_ind):
             return (DIR_UP, newx, newy, dir_ind)
         assert False
 
-
     return (cur_dir, newx, newy, dir_ind)
+
 
 def print_tracks():
     global tracks
@@ -125,9 +128,9 @@ while True:
         cur_dir, x, y, dir_ind = train
         train_positions.remove((x, y))
         if cur_dir == DIR_UP:
-            new_pos = (x, y-1)
+            new_pos = (x, y - 1)
         elif cur_dir == DIR_DOWN:
-            new_pos = (x, y+1)
+            new_pos = (x, y + 1)
         elif cur_dir == DIR_LEFT:
             new_pos = (x - 1, y)
         elif cur_dir == DIR_RIGHT:

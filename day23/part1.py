@@ -2,13 +2,15 @@
 
 import re
 
+
 def first_can_reach_second(p1, p2):
     x1, y1, z1, r1 = p1
     x2, y2, z2, r2 = p2
 
-    dist = abs(x1-x2) + abs(y1-y2) + abs(z1-z2)
+    dist = abs(x1 - x2) + abs(y1 - y2) + abs(z1 - z2)
 
     return r1 >= dist
+
 
 points = set()
 maxpoint = None
@@ -28,6 +30,3 @@ for p in points:
 
 
 print(can_reach_cnt)
-
-
-

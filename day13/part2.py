@@ -20,30 +20,31 @@ DIR_STRAIGHT = 10
 intersection_dirs = [DIR_LEFT, DIR_STRAIGHT, DIR_RIGHT]
 dir_map = {"^": DIR_UP, "v": DIR_DOWN, ">": DIR_RIGHT, "<": DIR_LEFT}
 track_map = {
-    "-":  STRAIGHT_HORIZ,
-    "<":  STRAIGHT_HORIZ,
-    ">":  STRAIGHT_HORIZ,
-    "|":  STRAIGHT_VERT,
-    "^":  STRAIGHT_VERT,
-    "v":  STRAIGHT_VERT,
-    "+":  INTERSECTION,
-    "/":  CURVE_RIGHT,
+    "-": STRAIGHT_HORIZ,
+    "<": STRAIGHT_HORIZ,
+    ">": STRAIGHT_HORIZ,
+    "|": STRAIGHT_VERT,
+    "^": STRAIGHT_VERT,
+    "v": STRAIGHT_VERT,
+    "+": INTERSECTION,
+    "/": CURVE_RIGHT,
     "\\": CURVE_LEFT,
-    " ":  EMPTY,
+    " ": EMPTY,
 }
 
 back = {
     STRAIGHT_HORIZ: "-",
-    STRAIGHT_VERT:  "|",
-    INTERSECTION:   "+",
-    CURVE_RIGHT:    "/",
-    CURVE_LEFT:     "\\",
-    EMPTY:          " ",
+    STRAIGHT_VERT: "|",
+    INTERSECTION: "+",
+    CURVE_RIGHT: "/",
+    CURVE_LEFT: "\\",
+    EMPTY: " ",
 }
 
 tracks = []
-trains = []    # stays ordered
-train_map = {} # positions => train
+trains = []  # stays ordered
+train_map = {}  # positions => train
+
 
 class Train(object):
     def __init__(self, x, y, direction):
@@ -161,8 +162,6 @@ with open("input.txt") as f:
             track_row.append(track_map[c])
 
         tracks.append(track_row)
-
-
 
 
 def print_tracks():

@@ -3,6 +3,7 @@
 import re
 
 from sys import setrecursionlimit
+
 setrecursionlimit(10000)
 
 grid = {}
@@ -25,11 +26,12 @@ ys = [y for _, y in grid.keys()]
 xmin, xmax = min(xs), max(xs)
 ymin, ymax = min(ys), max(ys)
 
+
 def print_grid():
     print("")
-    for y in range(0, ymax+1):
+    for y in range(0, ymax + 1):
         row_str = ""
-        for x in range(xmin, xmax+1):
+        for x in range(xmin, xmax + 1):
             if (x, y) in grid:
                 row_str += grid[(x, y)]
             else:
@@ -45,22 +47,23 @@ def fall(pos):
     if y >= ymax:
         return
 
-    if (x, y+1) not in grid:
+    if (x, y + 1) not in grid:
         # space below => fall downwards
-        grid[(x, y+1)] = "|"
-        fall((x, y+1))
+        grid[(x, y + 1)] = "|"
+        fall((x, y + 1))
 
     # expand left and right, if possible
-    if grid[(x, y+1)] in "~#" and (x-1, y) not in grid:
+    if grid[(x, y + 1)] in "~#" and (x - 1, y) not in grid:
         # solid below and empty to left => expand left
-        grid[(x-1, y)] = "|"
-        fall((x-1, y))
-    if grid[(x, y+1)] in "~#" and (x+1, y) not in grid:
+        grid[(x - 1, y)] = "|"
+        fall((x - 1, y))
+    if grid[(x, y + 1)] in "~#" and (x + 1, y) not in grid:
         # solid below and empty to right => expand right
-        grid[(x+1, y)] = "|"
-        fall((x+1, y))
+        grid[(x + 1, y)] = "|"
+        fall((x + 1, y))
 
     try_expand((x, y))
+
 
 def try_expand(pos):
     x, y = pos
@@ -88,6 +91,7 @@ def try_expand(pos):
     if bounded:
         expand(pos)
 
+
 def expand(pos):
     global grid
 
@@ -104,5 +108,14 @@ def expand(pos):
         grid[(rx, y)] = "~"
         rx += 1
 
+
 fall((500, 0))
-print(len([(x, y) for x, y in grid.keys() if grid[(x, y)] in "|~" and y <= ymax and y >= ymin]))
+print(
+    len(
+        [
+            (x, y)
+            for x, y in grid.keys()
+            if grid[(x, y)] in "|~" and y <= ymax and y >= ymin
+        ]
+    )
+)

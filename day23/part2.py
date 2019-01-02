@@ -12,18 +12,22 @@ with open("input.txt") as f:
         points.add(point)
         radii[point] = r
 
+
 def zabs(x):
     return If(x >= 0, x, -x)
 
+
 def zdist(a, b):
     "a, b :: (x, y z)"
-    return zabs(a[0] - b[0]) + zabs(a[1] - b[1])  + zabs(a[2] - b[2])
+    return zabs(a[0] - b[0]) + zabs(a[1] - b[1]) + zabs(a[2] - b[2])
+
 
 def dist(a, b):
     "a, b :: (x, y z)"
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])  + abs(a[2] - b[2])
+    return abs(a[0] - b[0]) + abs(a[1] - b[1]) + abs(a[2] - b[2])
 
-x, y, z = Ints("x y z") # variable coord
+
+x, y, z = Ints("x y z")  # variable coord
 pt = (x, y, z)
 
 o = Optimize()
@@ -39,5 +43,4 @@ o.check()
 
 model = o.model()
 best = model[x].as_long(), model[y].as_long(), model[z].as_long()
-print(dist((0,0,0), best))
-
+print(dist((0, 0, 0), best))

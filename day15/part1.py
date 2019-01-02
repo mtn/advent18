@@ -114,7 +114,9 @@ def print_grid(grid):
     grid_strs = list(map(lambda x: "".join(map(lambda y: y.__repr__(), x)), grid))
 
     for i, row in enumerate(grid):
-        line_movers = list(filter(lambda x: isinstance(x, Elf) or isinstance(x, Goblin), row))
+        line_movers = list(
+            filter(lambda x: isinstance(x, Elf) or isinstance(x, Goblin), row)
+        )
 
         for m in line_movers:
             grid_strs[i] += f" G({m.hp})" if isinstance(m, Goblin) else f" E({m.hp})"
@@ -148,13 +150,13 @@ def add_initial(move_queue, start):
     x = start[1]
     y = start[0]
 
-    if y - 1 >= 0 and grid[y-1][x] == GridSlot.GRID_OPEN:
+    if y - 1 >= 0 and grid[y - 1][x] == GridSlot.GRID_OPEN:
         move_queue.append(((y - 1, x), (y - 1, x), 1))
-    if x - 1 >= 0 and grid[y][x-1] == GridSlot.GRID_OPEN:
+    if x - 1 >= 0 and grid[y][x - 1] == GridSlot.GRID_OPEN:
         move_queue.append(((y, x - 1), (y, x - 1), 1))
-    if x + 1 < grid_width and grid[y][x+1] == GridSlot.GRID_OPEN:
+    if x + 1 < grid_width and grid[y][x + 1] == GridSlot.GRID_OPEN:
         move_queue.append(((y, x + 1), (y, x + 1), 1))
-    if y + 1 < grid_height and grid[y+1][x] == GridSlot.GRID_OPEN:
+    if y + 1 < grid_height and grid[y + 1][x] == GridSlot.GRID_OPEN:
         move_queue.append(((y + 1, x), (y + 1, x), 1))
 
 
@@ -236,6 +238,7 @@ def choose_move(destinations):
 
     return (dest, first_step)
 
+
 def attack(pos, enemytype):
     "pos :: (y, x)"
     global grid
@@ -244,7 +247,7 @@ def attack(pos, enemytype):
     y = pos[0]
     x = pos[1]
 
-    targets = [grid[y-1][x], grid[y+1][x], grid[y][x-1], grid[y][x+1]]
+    targets = [grid[y - 1][x], grid[y + 1][x], grid[y][x - 1], grid[y][x + 1]]
     targets = [x for x in targets if isinstance(x, enemytype)]
 
     if not targets:
@@ -258,6 +261,7 @@ def attack(pos, enemytype):
     if attackee.hp <= 0:
         grid[attackee.y][attackee.x] = GridSlot.GRID_OPEN
         movers = [m for m in movers if m != attackee]
+
 
 # print_grid(grid)
 # print("")

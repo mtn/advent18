@@ -16,7 +16,8 @@ erosion = {}
 # doesn't take very long to compute
 for y in range(1000):
     for x in range(2000):
-        if x == y == 0: gi = 0
+        if x == y == 0:
+            gi = 0
         elif x == tx and y == ty:
             gi = 0
         elif y == 0:
@@ -24,7 +25,7 @@ for y in range(1000):
         elif x == 0:
             gi = y * 48271
         else:
-            gi = erosion[(x-1, y)] * erosion[(x, y-1)]
+            gi = erosion[(x - 1, y)] * erosion[(x, y - 1)]
 
         erosion_level = (gi + depth) % 20183
         erosion[(x, y)] = erosion_level
@@ -37,6 +38,7 @@ REGION_ROCK = 0
 REGION_WET = 1
 REGION_NARROW = 2
 
+
 def check_gear(region, gear_type):
     if region == REGION_ROCK:
         return gear_type in [GEAR_CLIMBING, GEAR_TORCH]
@@ -47,9 +49,11 @@ def check_gear(region, gear_type):
     assert False, "bad region value to check_gear"
 
 
-reached = set() # ((x, y), gear_type)
-q = [(0, (0,0), GEAR_TORCH)] # (time, (x, y), gear_type), sorted by time (ties safely arbitrary)
-heapq.heapify(q) # a min heap
+reached = set()  # ((x, y), gear_type)
+q = [
+    (0, (0, 0), GEAR_TORCH)
+]  # (time, (x, y), gear_type), sorted by time (ties safely arbitrary)
+heapq.heapify(q)  # a min heap
 
 while q:
     t, (x, y), gear_type = heapq.heappop(q)
@@ -66,17 +70,13 @@ while q:
     # Spawn changers
     for change_gear in [GEAR_TORCH, GEAR_CLIMBING, GEAR_NONE]:
         if check_gear(region_type, change_gear):
-            heapq.heappush(q, (t+7, (x, y), change_gear))
+            heapq.heappush(q, (t + 7, (x, y), change_gear))
 
-    if x + 1 < 2000 and check_gear(erosion[(x+1, y)]%3, gear_type):
-        heapq.heappush(q, (t+1, (x+1, y), gear_type))
-    if x - 1 >= 0 and check_gear(erosion[(x-1, y)]%3, gear_type):
-        heapq.heappush(q, (t+1, (x-1, y), gear_type))
-    if y + 1 >= 0 and check_gear(erosion[(x, y+1)]%3, gear_type):
-        heapq.heappush(q, (t+1, (x, y+1), gear_type))
-    if y - 1 >= 0 and check_gear(erosion[(x, y-1)]%3, gear_type):
-        heapq.heappush(q, (t+1, (x, y-1), gear_type))
-
-
-
-
+    if x + 1 < 2000 and check_gear(erosion[(x + 1, y)] % 3, gear_type):
+        heapq.heappush(q, (t + 1, (x + 1, y), gear_type))
+    if x - 1 >= 0 and check_gear(erosion[(x - 1, y)] % 3, gear_type):
+        heapq.heappush(q, (t + 1, (x - 1, y), gear_type))
+    if y + 1 >= 0 and check_gear(erosion[(x, y + 1)] % 3, gear_type):
+        heapq.heappush(q, (t + 1, (x, y + 1), gear_type))
+    if y - 1 >= 0 and check_gear(erosion[(x, y - 1)] % 3, gear_type):
+        heapq.heappush(q, (t + 1, (x, y - 1), gear_type))

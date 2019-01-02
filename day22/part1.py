@@ -12,8 +12,8 @@ tx, ty = int(coords[0]), int(coords[1])
 
 erosion = {}
 risk_level = 0
-for y in range(ty+1):
-    for x in range(tx+1):
+for y in range(ty + 1):
+    for x in range(tx + 1):
         if x == y == 0:
             gi = 0
         elif x == tx and y == ty:
@@ -23,18 +23,13 @@ for y in range(ty+1):
         elif x == 0:
             gi = y * 48271
         else:
-            gi = erosion[(x-1, y)] * erosion[(x, y-1)]
+            gi = erosion[(x - 1, y)] * erosion[(x, y - 1)]
 
         erosion_level = (gi + depth) % 20183
         erosion[(x, y)] = erosion_level
 
-for y in range(ty+1):
-    for x in range(tx+1):
+for y in range(ty + 1):
+    for x in range(tx + 1):
         risk_level += erosion[(x, y)] % 3
 
 print(risk_level)
-
-
-
-
-

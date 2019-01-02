@@ -3,9 +3,9 @@
 from collections import defaultdict
 
 open_parens = []
-start_end = {} # open paren to close paren ind
-alt_starts = {} # alternation to opening "("
-alts = {} # maps "(" ind to [alternations]
+start_end = {}  # open paren to close paren ind
+alt_starts = {}  # alternation to opening "("
+alts = {}  # maps "(" ind to [alternations]
 with open("input.txt") as f:
     inp = f.read().strip()
 
@@ -26,10 +26,12 @@ for i, ch in enumerate(inp):
         else:
             alts[open_parens[-1]] = [i]
 
-assert not open_parens # all opened parens should be closed
+assert not open_parens  # all opened parens should be closed
 
-g = defaultdict(set) # graph represented as adjacency lists
-visited = set() # what we've visited so we don't cycle in inp
+g = defaultdict(set)  # graph represented as adjacency lists
+visited = set()  # what we've visited so we don't cycle in inp
+
+
 def run(point, ind):
     global g
 
@@ -70,14 +72,15 @@ def run(point, ind):
 
         elif inp[ind] == "(":
             for alt in alts[ind]:
-                run(point, alt+1)
-            ind += 1 # the first branch wasn't parsed as part of the alts
+                run(point, alt + 1)
+            ind += 1  # the first branch wasn't parsed as part of the alts
         elif inp[ind] == ")":
             ind += 1
 
-run((0,0), 1)
 
-q = [((0,0),0)]
+run((0, 0), 1)
+
+q = [((0, 0), 0)]
 distances = {}
 count = 0
 while q:

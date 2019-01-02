@@ -97,6 +97,8 @@ class Unit(object):
 
 
 units = []
+
+
 def setup(boost):
     global units
     global immune_uid
@@ -128,16 +130,22 @@ def setup(boost):
                     l = l.strip()
                     if "weak" in l:
                         offset = len("weak to ")
-                        weaknesses = list(map(lambda x: x.strip(), l[offset:].split(",")))
+                        weaknesses = list(
+                            map(lambda x: x.strip(), l[offset:].split(","))
+                        )
                     if "immune" in l:
                         offset = len("immune to ")
-                        immunities = list(map(lambda x: x.strip(), l[offset:].split(",")))
+                        immunities = list(
+                            map(lambda x: x.strip(), l[offset:].split(","))
+                        )
 
             n, hp, dmg, init = map(int, re.findall("-?[0-9]+", line))
             dmg += boost if unit_type == TYPE_IMMUNE else 0
             units.append(Unit(unit_type, n, hp, atk, dmg, init, weaknesses, immunities))
 
+
 setup(0)
+
 
 def step(verbose=False):
     "verbose summarizes a battle step"
@@ -194,7 +202,7 @@ def step(verbose=False):
     if verbose:
         print("")
 
-    return total_killed > 0 # 0 == end of round, or infinite round
+    return total_killed > 0  # 0 == end of round, or infinite round
 
 
 boost = 1

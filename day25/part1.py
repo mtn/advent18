@@ -15,6 +15,7 @@ def manhattan_distance(p1, p2):
         + abs(p1[3] - p2[3])
     )
 
+
 member_of = {p: None for p in points}
 num_components = len(points)
 for p1 in points:
